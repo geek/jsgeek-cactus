@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<div class="menu">
+		<a href="http://github.com/geek" title="Follow me on github"><i class="icon-github icon-large"></i></a>
+		&nbsp;
+		<a href="http://twitter.com/wpreul" title="Follow me on twitter"><i class="icon-twitter icon-large"></i></a>
+		&nbsp;
+		<a href="https://www.linkedin.com/in/nodejs" title="LinkedIn Profile"><i class="icon-linkedin icon-large"></i></a>
+	</div>
+
+	<section id="wrapper">
+
+		<header id="header">
+			<a id="title" class="index" href="/">{% block title %}Words from Wyatt{% endblock %}</a>
+		</header> <!--header-->
+
+		<ul id="post-list">
+			{% for post in posts %}
+				<li>
+					<a href='/{{ post.path }}'><aside class="dates">{{ post.date|date:"M j" }}</aside></a>
+					<a href='/{{ post.path }}'>{{ post.title }} <h2>{{ post.headline }}</h2></a>
+				</li>
+			{% endfor %}
+		</ul>
+
+		<!-- Uncomment for link to archive.
+		{% if posts|length >= 4 %}
+			<footer id="post-list-footer">
+				<a id="archive-link" href="archive.html"> <span class="arrow">&larr;</span> Archive</a>
+			</footer>
+		{% endif %}
+		-->
+
+		{% block footer %}
+			<footer id="footer">
+				<p class="small"></p>
+			</footer>
+		{% endblock footer %}
+	</section>
+
+{% endblock content %}
