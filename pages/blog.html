@@ -1,19 +1,22 @@
 {% extends "base.html" %}
-{% block title %}{{ title }} | Wyatt{% endblock title %}
 {% block content %}
 
 <!-- NAVBAR-->
 <!--===============================================================-->
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
+
     <div class="row">
       <div class="col-sm-4">
         <a class="navbar-brand navbar-brand-blog" data-scroll href="/index.html"><img src="{% static '/images/logo.png' %}" style="max-height: 60px; max-width: 60px;" alt="logo"></a>
       </div>
+
       <div class="col-sm-8">
-        <a data-scroll href="/blog.html"><h2 class="pull-right title-blog">BLOG</h2></a>
+        <a data-scroll href="#home"><h2 class="pull-right title-blog">BLOG</h2></a>
       </div>
+
     </div>
+
   </div>
 </div>
 
@@ -21,57 +24,36 @@
 <!-- INTRO-->
 <!--===============================================================-->
 <div class="bg-intro-blog" id="home">
-	<div class="layer-intro-blog">
-	</div>
+  <div class="layer-intro-blog">
+  </div>
 </div>
-
 
 <!-- BLOG-->
 <!--===============================================================-->
 <div class="bg-post">
-	<div class="container">
-		<div class="row row-blog">
-			<div class="col-md-8 col-md-offset-2 wrapper-blog">
+  <div class="container">
 
-				<div class="row">
-					<div class="col-sm-12">
-						<h1 class="title-post">{{ title }}</h1>
-						<p class="small author"><span class="green">{{ post.date|date:"M j Y" }}</span></p>
+    <div class="row row-blog">
+      <div class="col-md-8 col-md-offset-2 wrapper-blog">
 
-						{% block body %}
-							This is where the post contents is.
-						{% endblock body %}
-					</div>
-				</div>
+  			{% for post in posts %}
+        <div class="row">
+          <div class="col-sm-12">
+            <a href="/{{ post.path }}"><h1 class="title-post">{{ post.title }}</h1></a>
+            <p class="small author"><span class="green">{{ post.date|date:"M j Y" }}</span></p>
+            <p>
+              {{ post.headline }}
+            </p>
+            <a href="/{{ post.path }}" class="btn btn-default">Read More</a>
+            <hr>
+          </div>
+        </div>
+  			{% endfor %}
 
-				<hr>
-
-				<div class="row">
-					<div class="col-sm-12">
-						<ul class="pager">
-							{% if prevPost %}
-								<li class="previous">
-									<a href='/{{ prevPost.path }}'>
-										<span class="arrow">&larr;</span> {{ prevPost.title }}
-									</a>
-								</li>
-							{% endif %}
-							{% if nextPost %}
-								<li class="next">
-									<a href='/{{ nextPost.path }}'>
-										{{ nextPost.title }} <span class="arrow">&rarr;</span>
-									</a>
-								</li>
-							{% endif %}
-						</ul>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
+      </div>
+    </div>
+  </div>
 </div>
-
 
 <!-- FOOTER-->
 <!--===============================================================-->
@@ -98,6 +80,5 @@
     </div>
   </div>
 </div>
-
 
 {% endblock content %}
